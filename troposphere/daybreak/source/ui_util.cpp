@@ -20,9 +20,11 @@
 
 namespace dbk {
 
+    const char *SwitchStandardFont = "switch-standard";
+    const char *SwitchChineseFont = "chinese-simplified";
+
     namespace {
 
-        constexpr const char *SwitchStandardFont = "switch-standard";
         constexpr float WindowCornerRadius = 20.0f;
         constexpr float TextAreaCornerRadius = 10.0f;
         constexpr float ButtonCornerRaidus = 3.0f;
@@ -35,6 +37,13 @@ namespace dbk {
             const int g2 = 71 + (float)(126 - 71) * (d * 0.7f + 0.3f);
             const int b2 = 185 + (float)(230 - 185) * (d * 0.7f + 0.3f);
             return nvgRGB(r2, g2, b2);
+        }
+
+        const char* GetFont(NVGcontext *vg, const char *font) {
+            if (nvgFindFont(vg, font) != -1) {
+                return font;
+            }
+            return SwitchStandardFont;
         }
 
     }
@@ -75,7 +84,7 @@ namespace dbk {
 
         /* Setup the font. */
         nvgFontSize(vg, std::min(32.0f, -(strlen(title)*0.5f) + 47.0f));
-        nvgFontFace(vg, SwitchStandardFont);
+        nvgFontFace(vg, GetFont(vg, SwitchChineseFont));
         nvgTextAlign(vg, NVG_ALIGN_LEFT | NVG_ALIGN_MIDDLE);
         nvgFillColor(vg, nvgRGB(0, 0, 0));
 
@@ -108,7 +117,7 @@ namespace dbk {
 
         /* Setup the font. */
         nvgFontSize(vg, 20.0f);
-        nvgFontFace(vg, SwitchStandardFont);
+        nvgFontFace(vg, GetFont(vg, SwitchChineseFont));
         nvgTextAlign(vg, NVG_ALIGN_LEFT | NVG_ALIGN_MIDDLE);
 
         /* Set the text colour. */
@@ -138,7 +147,7 @@ namespace dbk {
 
     void DrawText(NVGcontext *vg, float x, float y, float w, const char *text) {
         nvgFontSize(vg, 20.0f);
-        nvgFontFace(vg, SwitchStandardFont);
+        nvgFontFace(vg, GetFont(vg, SwitchChineseFont));
         nvgTextAlign(vg, NVG_ALIGN_LEFT | NVG_ALIGN_TOP);
         nvgFillColor(vg, nvgRGB(0, 0, 0));
 
@@ -151,7 +160,7 @@ namespace dbk {
         snprintf(progress_text, sizeof(progress_text)-1, "%d%% complete", static_cast<int>(progress * 100.0f));
 
         nvgFontSize(vg, 24.0f);
-        nvgFontFace(vg, SwitchStandardFont);
+        nvgFontFace(vg, GetFont(vg, SwitchChineseFont));
         nvgTextAlign(vg, NVG_ALIGN_LEFT | NVG_ALIGN_MIDDLE);
         nvgFillColor(vg, nvgRGB(0, 0, 0));
         nvgText(vg, x, y, progress_text, nullptr);
@@ -181,7 +190,7 @@ namespace dbk {
 
         /* Configure the text. */
         nvgFontSize(vg, 18.0f);
-        nvgFontFace(vg, SwitchStandardFont);
+        nvgFontFace(vg, GetFont(vg, SwitchChineseFont));
         nvgTextLineHeight(vg, 1.3f);
         nvgTextAlign(vg, NVG_ALIGN_LEFT | NVG_ALIGN_TOP);
         nvgFillColor(vg, nvgRGB(0, 0, 0));

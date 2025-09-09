@@ -96,6 +96,7 @@ class Daybreak : public CApplication {
         std::optional<nvg::DkRenderer> m_renderer;
         NVGcontext *m_vg;
         int m_standard_font;
+        int m_chinese_font;
     public:
         Daybreak() {
             Result rc = 0;
@@ -129,6 +130,14 @@ class Daybreak : public CApplication {
             }
 
             m_standard_font = nvgCreateFontMem(m_vg, "switch-standard", static_cast<u8 *>(font.address), font.size, 0);
+            
+            // 尝试加载简体中文字体
+            PlFontData chineseFont;
+            if (R_SUCCEEDED(plGetSharedFontByType(&chineseFont, PlSharedFontType_ChineseSimplified))) {
+                m_chinese_font = nvgCreateFontMem(m_vg, "chinese-simplified", static_cast<u8 *>(chineseFont.address), chineseFont.size, 0);
+            } else {
+                m_chinese_font = -1;
+            }
         }
 
         ~Daybreak() {

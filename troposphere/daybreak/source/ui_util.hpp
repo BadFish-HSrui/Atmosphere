@@ -19,6 +19,9 @@
 
 namespace dbk {
 
+    extern const char *SwitchStandardFont;
+    extern const char *SwitchChineseFont;
+
     enum class ButtonStyle {
         Standard,
         StandardSelected,
