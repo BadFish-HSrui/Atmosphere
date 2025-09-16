@@ -782,7 +782,7 @@ namespace dbk {
 
     Result ValidateUpdateMenu::GetUpdateInformation() {
         Result rc = 0;
-        this->LogText("Directory %s\n", g_update_path);
+        this->LogText("固件文件夹: SD:%s\n", g_update_path);
 
         /* Attempt to get the update information. */
         if (R_FAILED(rc = amssuGetUpdateInformation(&m_update_info, g_update_path))) {
@@ -1029,7 +1029,7 @@ namespace dbk {
                     break;
             }
 
-            ChangeMenu(std::make_shared<WarningMenu>(g_current_menu, std::make_shared<InstallUpdateMenu>(g_current_menu), "Ready to begin update installation", "Are you sure you want to proceed?"));
+            ChangeMenu(std::make_shared<WarningMenu>(g_current_menu, std::make_shared<InstallUpdateMenu>(g_current_menu), "准备开始安装固件更新", "确定要继续吗?"));
         }
 
         this->UpdateButtons();
