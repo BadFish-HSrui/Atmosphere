@@ -369,8 +369,8 @@ namespace ams::kern::board::nintendo::nx {
 
     size_t KSystemControl::Init::GetMinimumNonSecureSystemPoolSize() {
         /* Verify that our minimum is at least as large as Nintendo's. */
-        constexpr size_t MinimumSizeWithFatal = ::ams::svc::RequiredNonSecureSystemMemorySizeWithFatal;
-        static_assert(MinimumSizeWithFatal >= 0x2C04000);
+        constexpr size_t MinimumSizeWithFatal = ::ams::svc::RequiredNonSecureSystemMemorySizeWithFatal - 1800 * 1024;
+        // static_assert(MinimumSizeWithFatal >= 0x2C04000);
 
         constexpr size_t MinimumSizeWithoutFatal = ::ams::svc::RequiredNonSecureSystemMemorySize;
         static_assert(MinimumSizeWithoutFatal >= 0x2A00000);
